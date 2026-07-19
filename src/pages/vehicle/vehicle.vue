@@ -43,6 +43,18 @@
           <text class="value">{{ vehicle.is_premium ? '是' : '否' }}</text>
         </view>
         <view class="info-item">
+          <text class="label">活动载具</text>
+          <text class="value">{{ vehicle.is_event ? '是' : '否' }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">赠送载具</text>
+          <text class="value">{{ vehicle.is_gift ? '是' : '否' }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">常规载具</text>
+          <text class="value">{{ vehicle.is_normal ? '是' : '否' }}</text>
+        </view>
+        <view class="info-item">
           <text class="label">隐藏载具</text>
           <text class="value">{{ vehicle.is_hidden ? '是' : '否' }}</text>
         </view>

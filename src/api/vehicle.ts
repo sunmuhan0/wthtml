@@ -7,6 +7,9 @@ export interface Vehicle {
   rank: number
   br: string
   is_premium: boolean
+  is_event: boolean
+  is_gift: boolean
+  is_normal: boolean
   is_hidden: boolean
   crew: number
   mass: number
