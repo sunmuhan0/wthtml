@@ -7,6 +7,11 @@ export interface Vehicle {
   rank: number
   br: string
   is_premium: boolean
+  is_hidden: boolean
+  crew: number
+  mass: number
+  engine_power: number
+  max_speed: number
 }
 
 export interface Squadron {

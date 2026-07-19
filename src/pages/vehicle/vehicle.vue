@@ -24,6 +24,26 @@
           <text class="label">权重</text>
           <text class="value">{{ vehicle.br }}</text>
         </view>
+        <view class="info-item">
+          <text class="label">乘员</text>
+          <text class="value">{{ vehicle.crew }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">质量 (t)</text>
+          <text class="value">{{ vehicle.mass }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">引擎功率 (hp)</text>
+          <text class="value">{{ vehicle.engine_power }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">最高速度 (km/h)</text>
+          <text class="value">{{ vehicle.max_speed }}</text>
+        </view>
+        <view class="info-item">
+          <text class="label">金币载具</text>
+          <text class="value">{{ vehicle.is_premium ? '是' : '否' }}</text>
+        </view>
       </view>
     </view>
   </view>
