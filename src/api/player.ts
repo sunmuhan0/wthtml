@@ -19,5 +19,5 @@ export interface ModeStats {
 }
 
 export function getPlayer(nickname: string) {
-  return request<Player>(`/player-ts/${nickname}`)
+  return request<Player>(`/player-ts/${encodeURIComponent(nickname)}`)
 }

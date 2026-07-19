@@ -17,13 +17,19 @@ export interface Squadron {
 }
 
 export function getVehicle(name: string) {
-  return request<Vehicle>(`/vehicle/${name}`)
+  return request<Vehicle>(`/vehicle/${encodeURIComponent(name)}`)
 }
 
 export function getSquadron(name: string) {
   return request<Squadron>(`/squadron/${name}`)
 }
 
-export function getNews() {
-  return request<{ news: string[] }>('/news')
+export interface NewsItem {
+  url: string
+  title: string
+  image: string
+}
+
+export function getNews(lang: string = 'zh') {
+  return request<NewsItem[]>(`/news?lang=${lang}`)
 }

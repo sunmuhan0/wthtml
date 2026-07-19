@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
 import { getPlayer, type Player, type ModeStats } from '@/api/player'
 
 const nickname = ref('')
@@ -60,6 +61,13 @@ const modes = [
 const current = computed<ModeStats>(() => {
   if (!player.value) return {} as ModeStats
   return player.value[activeMode.value as keyof Player] as ModeStats || {} as ModeStats
+})
+
+onLoad((options: any) => {
+  if (options?.nickname) {
+    nickname.value = decodeURIComponent(options.nickname)
+    search()
+  }
 })
 
 async function search() {

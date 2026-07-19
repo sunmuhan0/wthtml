@@ -28,22 +28,27 @@
     <view v-if="news.length" class="news-section">
       <text class="section-title">游戏资讯</text>
       <view class="news-item" v-for="(item, i) in news" :key="i">
-        <text class="news-text">{{ item }}</text>
+        <image v-if="item.image" class="news-image" :src="item.image" mode="aspectFill" />
+        <text class="news-text">{{ item.title }}</text>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { getNews } from '@/api/vehicle'
+import { ref, onMounted } from 'vue'
+import { getNews, type NewsItem } from '@/api/vehicle'
 
 const query = ref('')
-const news = ref<string[]>([])
+const news = ref<NewsItem[]>([])
+
+onMounted(() => {
+  loadNews()
+})
 
 function handleSearch() {
   if (!query.value) return
-  uni.navigateTo({ url: `/pages/player/player?nickname=${query.value}` })
+  uni.navigateTo({ url: `/pages/player/player?nickname=${encodeURIComponent(query.value)}` })
 }
 
 function navigateTo(page: string) {
@@ -52,8 +57,7 @@ function navigateTo(page: string) {
 
 async function loadNews() {
   try {
-    const res = await getNews()
-    news.value = res.news
+    news.value = await getNews()
   } catch {
     uni.showToast({ title: '获取资讯失败', icon: 'none' })
   }
@@ -136,12 +140,17 @@ async function loadNews() {
 }
 .news-item {
   background: rgba(255,255,255,0.06);
-  border-radius: 12rpx;
-  padding: 24rpx;
-  margin-bottom: 16rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+.news-image {
+  width: 100%;
+  height: 360rpx;
 }
 .news-text {
   font-size: 26rpx;
   color: #ccc;
+  padding: 20rpx 24rpx;
 }
 </style>

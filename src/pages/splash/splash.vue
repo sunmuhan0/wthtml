@@ -10,19 +10,19 @@
       <button class="skip-btn" @tap="goHome">跳过</button>
     </view>
 
-    <view class="ad-wrapper" v-if="showAd">
+    <!-- <view class="ad-wrapper" v-if="showAd">
       <ad :unit-id="adUnitId" ad-intervals="30"></ad>
-    </view>
+    </view> -->
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { AD_UNITS } from '@/api/ad'
+// import { AD_UNITS } from '@/api/ad'
 
 const countdown = ref(5)
 const showAd = ref(false)
-const adUnitId = AD_UNITS.splash
+// const adUnitId = AD_UNITS.splash
 
 let timer: ReturnType<typeof setInterval> | null = null
 
@@ -32,8 +32,6 @@ function goHome() {
 }
 
 onMounted(() => {
-  showAd.value = true
-
   timer = setInterval(() => {
     countdown.value--
     if (countdown.value <= 0) {
