@@ -33,3 +33,19 @@ export interface NewsItem {
 export function getNews(lang: string = 'zh') {
   return request<NewsItem[]>(`/news?lang=${lang}`)
 }
+
+export interface ContentBlock {
+  type: string
+  level?: number
+  text?: string
+  url?: string
+}
+
+export interface NewsDetail {
+  title: string
+  content: ContentBlock[]
+}
+
+export function getNewsDetail(url: string) {
+  return request<NewsDetail>(`/news/detail?url=${encodeURIComponent(url)}`)
+}
