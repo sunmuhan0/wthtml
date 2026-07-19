@@ -5,6 +5,19 @@
       <text class="title">战争雷霆查询</text>
     </view>
 
+    <view v-if="news.length" class="news-section">
+      <text class="section-title">游戏资讯</text>
+      <swiper class="news-swiper" :autoplay="true" :circular="true" :interval="4000" :duration="500"
+        :indicator-dots="true" indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#e74c3c">
+        <swiper-item v-for="(item, i) in news" :key="i">
+          <view class="news-card" @tap="openNews(item.url)">
+            <image v-if="item.image" class="news-image" :src="item.image" mode="aspectFill" />
+            <text class="news-text">{{ item.title }}</text>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+
     <view class="search-box">
       <input class="search-input" v-model="query" placeholder="输入玩家昵称 / 载具名称" />
       <button class="search-btn" @tap="handleSearch">查询</button>
@@ -18,18 +31,6 @@
       <view class="link-card" @tap="navigateTo('vehicle')">
         <text class="link-icon">🚁</text>
         <text class="link-label">载具百科</text>
-      </view>
-      <view class="link-card" @tap="loadNews">
-        <text class="link-icon">📰</text>
-        <text class="link-label">最新资讯</text>
-      </view>
-    </view>
-
-    <view v-if="news.length" class="news-section">
-      <text class="section-title">游戏资讯</text>
-      <view class="news-item" v-for="(item, i) in news" :key="i">
-        <image v-if="item.image" class="news-image" :src="item.image" mode="aspectFill" />
-        <text class="news-text">{{ item.title }}</text>
       </view>
     </view>
   </view>
@@ -53,6 +54,10 @@ function handleSearch() {
 
 function navigateTo(page: string) {
   uni.navigateTo({ url: `/pages/${page}/${page}` })
+}
+
+function openNews(url: string) {
+  uni.navigateTo({ url: `/pages/news/news?url=${encodeURIComponent(url)}` })
 }
 
 async function loadNews() {
@@ -138,19 +143,27 @@ async function loadNews() {
   margin-bottom: 20rpx;
   display: block;
 }
-.news-item {
+.news-swiper {
+  width: 100%;
+  height: 480rpx;
+}
+.news-card {
   background: rgba(255,255,255,0.06);
   border-radius: 16rpx;
-  margin-bottom: 20rpx;
   overflow: hidden;
+  height: 100%;
 }
 .news-image {
   width: 100%;
-  height: 360rpx;
+  height: 380rpx;
 }
 .news-text {
+  display: block;
   font-size: 26rpx;
   color: #ccc;
-  padding: 20rpx 24rpx;
+  padding: 16rpx 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
