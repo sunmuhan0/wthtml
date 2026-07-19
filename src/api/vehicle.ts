@@ -29,6 +29,18 @@ export function getSquadron(name: string) {
   return request<Squadron>(`/squadron/${name}`)
 }
 
+export function listVehicles(country: string, type: string, search: string) {
+  const params = new URLSearchParams()
+  if (country) params.set('country', country)
+  if (type) params.set('type', type)
+  if (search) params.set('search', search)
+  return request<Vehicle[]>(`/vehicles?${params.toString()}`)
+}
+
+export function getVehicleFilters() {
+  return request<{ countries: string[]; types: string[] }>('/vehicle-filters')
+}
+
 export interface NewsItem {
   url: string
   title: string
