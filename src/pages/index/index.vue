@@ -33,6 +33,16 @@
         <text class="link-label">载具百科</text>
       </view>
     </view>
+
+    <view v-if="showDetail" class="news-overlay" @tap.self="showDetail = false">
+      <view class="news-detail">
+        <view class="detail-header">
+          <text class="detail-title">资讯详情</text>
+          <text class="detail-close" @tap="showDetail = false">✕</text>
+        </view>
+        <web-view :src="detailUrl" v-if="showDetail" />
+      </view>
+    </view>
   </view>
 </template>
 
@@ -42,6 +52,8 @@ import { getNews, type NewsItem } from '@/api/vehicle'
 
 const query = ref('')
 const news = ref<NewsItem[]>([])
+const showDetail = ref(false)
+const detailUrl = ref('')
 
 onMounted(() => {
   loadNews()
@@ -57,7 +69,8 @@ function navigateTo(page: string) {
 }
 
 function openNews(url: string) {
-  uni.navigateTo({ url: `/pages/news/news?url=${encodeURIComponent(url)}` })
+  detailUrl.value = url
+  showDetail.value = true
 }
 
 async function loadNews() {
@@ -135,7 +148,7 @@ async function loadNews() {
   font-size: 28rpx;
 }
 .news-section {
-  margin-top: 40rpx;
+  margin-top: 20rpx;
 }
 .section-title {
   font-size: 32rpx;
@@ -165,5 +178,42 @@ async function loadNews() {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.news-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+.news-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 60rpx 20rpx 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: #1a1a2e;
+}
+.detail-title {
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.detail-close {
+  color: #fff;
+  font-size: 36rpx;
+  padding: 10rpx;
 }
 </style>
