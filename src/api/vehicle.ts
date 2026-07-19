@@ -33,13 +33,11 @@ export function getSquadron(name: string) {
 }
 
 export function listVehicles(country: string, type: string, search: string, offset = 0, limit = 30) {
-  const params = new URLSearchParams()
-  if (country) params.set('country', country)
-  if (type) params.set('type', type)
-  if (search) params.set('search', search)
-  params.set('offset', String(offset))
-  params.set('limit', String(limit))
-  return request<{ items: Vehicle[]; total: number }>(`/vehicles?${params.toString()}`)
+  let qs = `offset=${offset}&limit=${limit}`
+  if (country) qs += `&country=${encodeURIComponent(country)}`
+  if (type) qs += `&type=${encodeURIComponent(type)}`
+  if (search) qs += `&search=${encodeURIComponent(search)}`
+  return request<{ items: Vehicle[]; total: number }>(`/vehicles?${qs}`)
 }
 
 export function getVehicleFilters() {
