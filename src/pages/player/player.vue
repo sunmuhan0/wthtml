@@ -46,7 +46,7 @@
           <view class="ratings-row">
             <view v-if="player.ratings_neo!.tank_realistic" class="rating-pill neo">
               <text class="rating-val">{{ player.ratings_neo!.tank_realistic.monthly.wt8.toFixed(0) }}</text>
-              <text class="rating-cat">真战陆战</text>
+              <text class="rating-cat">历史陆战</text>
               <text v-if="player.ratings_neo!.tank_realistic.monthly.is_suspicious" class="sus">!</text>
             </view>
             <view v-if="player.ratings_neo!.tank_arcade" class="rating-pill neo">
@@ -55,7 +55,7 @@
             </view>
             <view v-if="player.ratings_neo!.air_realistic" class="rating-pill neo">
               <text class="rating-val">{{ player.ratings_neo!.air_realistic.monthly.wt8.toFixed(0) }}</text>
-              <text class="rating-cat">真战空战</text>
+              <text class="rating-cat">历史空战</text>
             </view>
             <view v-if="player.ratings_neo!.air_arcade" class="rating-pill neo">
               <text class="rating-val">{{ player.ratings_neo!.air_arcade.monthly.wt8.toFixed(0) }}</text>
@@ -111,7 +111,7 @@
           <view v-for="v in filteredVehicles" :key="v.internal_name + v.mode" class="veh-row">
             <view class="veh-left">
               <text class="veh-name">{{ v.name }}</text>
-              <text class="veh-meta">{{ countryShort(v.country) }} · {{ v.mode === 'arcade' ? '街机' : '真战' }}</text>
+              <text class="veh-meta">{{ countryShort(v.country) }} · {{ v.mode === 'arcade' ? '街机' : '历史' }}</text>
             </view>
             <view class="veh-right">
               <view class="veh-stat"><text class="vs-val">{{ v.battles }}</text><text class="vs-lbl">场</text></view>
@@ -193,8 +193,8 @@ const error = ref('')
 
 const modes = [
   { key: 'arcade', label: '街机' },
-  { key: 'realistic', label: '真战' },
-  { key: 'simulator', label: '模拟' },
+  { key: 'realistic', label: '历史' },
+  { key: 'simulator', label: '全真' },
 ]
 
 const vehicleFilters = [
@@ -279,7 +279,7 @@ function countryName(c: string) { return countryNames[c] || c }
 function countryShort(c: string) { return countryShortMap[c] || c }
 
 function ratingName(c: string) {
-  const m: Record<string, string> = { tank_realistic: '真战陆', tank_arcade: '街机陆', air_realistic: '真战空', air_arcade: '街机空', tank_simulation: '模拟陆', air_simulation: '模拟空', helicopter_arcade: '直升机' }
+  const m: Record<string, string> = { tank_realistic: '历史陆', tank_arcade: '街机陆', air_realistic: '历史空', air_arcade: '街机空', tank_simulation: '全真陆', air_simulation: '全真空', helicopter_arcade: '直升机' }
   return m[c] || c
 }
 
