@@ -17,7 +17,7 @@
         <text v-if="player.title_disc" class="title-disc">{{ player.title_disc }}</text>
         <view class="info-row">
           <text v-if="player.squadron" class="tag squadron-tag">{{ player.squadron }}</text>
-          <text class="tag spaded-tag">满研 {{ player.spaded_total }}</text>
+          <text class="tag spaded-tag">载具 {{ player.spaded_total }}</text>
           <text class="tag" :class="player.ban_status === 'CLEAN' ? 'ok-tag' : 'ban-tag'">{{ player.ban_status }}</text>
         </view>
         <view class="info-row small">
@@ -125,9 +125,9 @@
         </view>
       </view>
 
-      <!-- 满研国家分布 -->
+      <!-- 载具国家分布 -->
       <view v-if="player.spaded_total > 0" class="card">
-        <text class="section-title">满研分布 ({{ player.spaded_total }})</text>
+        <text class="section-title">载具分布 ({{ player.spaded_total }})</text>
         <view class="spaded-grid">
           <view v-for="(count, country) in player.spaded_by_country" :key="country" class="spaded-item">
             <text class="spaded-name">{{ countryName(country) }}</text>
