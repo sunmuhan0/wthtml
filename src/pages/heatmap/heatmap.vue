@@ -102,7 +102,6 @@ function cellColor(cell: GlobalStatCell | null): string {
     const g = Math.round(255 * ratio)
     return `rgba(${r}, ${g}, 50, 0.7)`
   }
-  const intensity = Math.round(ratio * 200 + 30)
   return `rgba(231, 76, 60, ${0.2 + ratio * 0.6})`
 }
 
