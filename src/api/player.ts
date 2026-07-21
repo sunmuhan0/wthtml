@@ -40,6 +40,7 @@ export interface PlayerDetail {
   last_online: number
   spaded_total: number
   spaded_by_country: Record<string, number>
+  vehicles: VehicleEntry[]
   arcade: DetailMode | null
   realistic: DetailMode | null
   simulator: DetailMode | null
@@ -160,6 +161,22 @@ export interface TitleEntry {
   name: string
   lang: string
   disc: string
+}
+
+export interface VehicleEntry {
+  mode: string
+  country: string
+  name: string
+  battles: number
+  win_rate: number
+  ground_kills: number
+  air_kills: number
+  deaths: number
+  time_played: number
+  rp: number
+  spaded: boolean
+  category: string
+  internal_name: string
 }
 
 export interface UserInfo {
